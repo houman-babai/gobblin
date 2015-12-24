@@ -26,23 +26,23 @@ import kafka.message.MessageAndOffset;
  */
 public class KafkaSimpleExtractor extends KafkaExtractor<String, byte[]> {
 
-  public KafkaSimpleExtractor(WorkUnitState state) {
-    super(state);
-  }
+    public KafkaSimpleExtractor(WorkUnitState state) {
+        super(state);
+    }
 
-  @Override
-  protected byte[] decodeRecord(MessageAndOffset messageAndOffset) throws IOException {
-    return getBytes(messageAndOffset.message().payload());
-  }
+    @Override
+    protected byte[] decodeRecord(MessageAndOffset messageAndOffset) throws IOException {
+        return getBytes(messageAndOffset.message().payload());
+    }
 
-  /**
-   * Get the schema (metadata) of the extracted data records.
-   *
-   * @return the Kafka topic being extracted
-   * @throws IOException if there is problem getting the schema
-   */
-  @Override
-  public String getSchema() throws IOException {
-    return this.topicName;
-  }
+    /**
+     * Get the schema (metadata) of the extracted data records.
+     *
+     * @return the Kafka topic being extracted
+     * @throws IOException if there is problem getting the schema
+     */
+    @Override
+    public String getSchema() throws IOException {
+        return this.topicName;
+    }
 }
