@@ -540,6 +540,8 @@ public class MRJobLauncher extends AbstractJobLauncher {
             try {
                 // De-serialize and collect the list of WorkUnits to run
                 while (context.nextKeyValue()) {
+                    LOG.info("****" + context.getCurrentValue());
+
                     this.map(context.getCurrentKey(), context.getCurrentValue(), context);
                 }
                 // Actually run the list of WorkUnits
