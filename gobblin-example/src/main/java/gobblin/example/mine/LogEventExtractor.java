@@ -8,7 +8,6 @@ import java.io.IOException;
 import kafka.message.MessageAndOffset;
 
 import org.apache.avro.io.BinaryDecoder;
-import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,15 +31,16 @@ public class LogEventExtractor extends KafkaExtractor<String, LogEvent> {
 
     @Override
     protected LogEvent decodeRecord(MessageAndOffset messageAndOffset) throws IOException {
-        LOGGER.info("Decoding " + messageAndOffset.offset());
-        try {
-            decoder = DecoderFactory.get().binaryDecoder(messageAndOffset.message().payload().array(), decoder);
-            return reader.read(null, decoder);
-        } catch (Throwable t) {
-            LOGGER.error("Failed to decode record " + messageAndOffset, t);
-            LOG_EVENT.setTime(messageAndOffset.offset());
-            return LOG_EVENT;
-        }
-
+        // LOGGER.info("Decoding " + messageAndOffset.offset());
+        // try {
+        // decoder = DecoderFactory.get().binaryDecoder(messageAndOffset.message().payload().array(), decoder);
+        // return reader.read(null, decoder);
+        // } catch (Throwable t) {
+        // LOGGER.error("Failed to decode record " + messageAndOffset, t);
+        // LOG_EVENT.setTime(messageAndOffset.offset());
+        // return LOG_EVENT;
+        // }
+        LOG_EVENT.setTime(messageAndOffset.offset());
+        return LOG_EVENT;
     }
 }
